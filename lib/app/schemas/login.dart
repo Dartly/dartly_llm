@@ -1,5 +1,5 @@
 import 'package:dartly_llm/app/schemas/base_schema.dart';
-import 'package:dartly_llm/app/validator.dart';
+import 'package:dartly_llm/common/validator/validator.dart';
 
 class Login extends BaseSchema {
   Login({
