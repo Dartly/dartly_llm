@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
       - name: Push Docker image
         run: docker push dartly/vania:latest
 
-      # 新增步骤：确认 docker-compose.yml 存在
+      # 确认 docker-compose.yml 存在
       - name: Check if docker-compose.yml exists
         run: |
           if [ -f "./docker-compose.yml" ]; then
@@ -54,6 +54,16 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "./docker-compose.yml"
           target: "/www/dartly_llm"  # 确保目标路径正确
+
+      # 检查目标目录是否存在并列出内容
+      - name: List target directory
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ls -la /www/dartly_llm  # 列出目标目录中的文件
 
       - name: SSH to server and restart Docker container
         uses: appleboy/ssh-action@master
