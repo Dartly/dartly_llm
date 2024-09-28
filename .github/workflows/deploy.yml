@@ -23,13 +23,18 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t dartly/vania:latest .
+          # 使用当前 Git 提交的 SHA 作为标签
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t dartly/vania:latest -t dartly/vania:${IMAGE_TAG} .
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Push Docker image
-        run: docker push dartly/vania:latest
+      - name: Push Docker images
+        run: |
+          # 推送最新镜像和带 SHA 标签的镜像
+          docker push dartly/vania:latest
+          docker push dartly/vania:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -43,7 +48,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull dartly/vania:latest  # Pull the latest Docker image
+            # Pull the latest Docker image
+            docker pull dartly/vania:latest
             docker stop vania || true         # Stop the running container if it exists
             docker rm vania || true           # Remove the container if it exists
             docker run -d -p 8000:8000 \
