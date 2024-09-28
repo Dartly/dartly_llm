@@ -23,13 +23,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t vania/app:latest .
+          docker build -t dartly/vania:latest .  # 更新为你的 Docker Hub 用户名
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Push Docker image
-        run: docker push vania/app:latest
+        run: docker push dartly/vania:latest  # 更新为你的 Docker Hub 用户名
 
   deploy:
     runs-on: ubuntu-latest
