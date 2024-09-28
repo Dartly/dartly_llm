@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - dev  # 根据你的默认分支修改
+      - master  # 根据你的默认分支修改
 
 jobs:
   build:
