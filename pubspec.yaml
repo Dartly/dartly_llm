@@ -9,11 +9,14 @@ environment:
 dependencies:
   vania:
     git: https://gitee.com/golabe/framework.git
+  reflectable: ^3.0.1
 
 
 dev_dependencies:
   lints: ^2.1.0
   test: ^1.24.0
+  build_runner: ^2.0.0
+  reflectable: ^3.0.1
 
 dependency_overrides:
   pointycastle: 3.7.3
