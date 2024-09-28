@@ -3,49 +3,31 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Dart
-        uses: dart-lang/setup-dart@v1
+      - name: Sync code to server
+        uses: appleboy/scp-action@v0.1.0
         with:
-          sdk: stable
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: "/www/"
 
-      - name: Install dependencies
-        run: dart pub get
-
-      - name: Build Docker image
-        run: |
-          IMAGE_TAG=${{ github.sha }}
-          docker build -t dartly/vania:latest -t dartly/vania:${IMAGE_TAG} .
-
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-      - name: Push Docker images
-        run: |
-          docker push dartly/vania:latest
-          docker push dartly/vania:${{ github.sha }}
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: SSH to server and pull Docker image
+      - name: SSH to server and deploy
         uses: appleboy/ssh-action@v0.1.0
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull dartly/vania:latest
             cd /www/dartly_llm
             docker-compose up --build -d
