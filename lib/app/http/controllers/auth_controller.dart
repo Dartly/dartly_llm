@@ -1,9 +1,10 @@
-import 'package:dartly_llm/validator/validator_factory.dart';
+import 'package:dartly_llm/app/schemas/login.dart';
 import 'package:vania/vania.dart';
 
 class AuthController extends Controller {
   Future<Response> login(Request req) async {
-    ValidatorFactory.validate(req.toJson());
+    final post = Login.fromJson(req.toJson());
+    post.validate();
     return ApiResult.success();
   }
 }

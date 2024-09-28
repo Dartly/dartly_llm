@@ -1,4 +1,7 @@
-class Login {
+import 'package:dartly_llm/app/schemas/base_schema.dart';
+import 'package:dartly_llm/app/validator.dart';
+
+class Login extends BaseSchema {
   Login({
     required this.email,
     required this.code,
@@ -17,14 +20,26 @@ class Login {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        "email": email,
-        "code": code,
-        "password": password,
-      };
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      "email": email,
+      "code": code,
+      "password": password,
+    };
+  }
 
   @override
   String toString() {
     return "$email, $code, $password, ";
+  }
+
+  @override
+  Map<String, ValidationStrategy>? validatorRule() {
+    return {
+      "email": EmailStrategy(),
+      "code": LengthStrategy(6, 6, message: '长度必须为6'),
+      "password": LengthStrategy(8, 12),
+    };
   }
 }
