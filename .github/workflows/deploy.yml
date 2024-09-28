@@ -50,7 +50,7 @@ jobs:
           echo "  app:" >> docker-compose.yml
           
       - name: Upload docker-compose.yml
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docker-compose
           path: docker-compose.yml
@@ -61,7 +61,7 @@ jobs:
 
     steps:
       - name: Download docker-compose.yml
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: docker-compose
 
