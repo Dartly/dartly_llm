@@ -516,10 +516,11 @@ packages:
   vania:
     dependency: "direct main"
     description:
-      name: vania
-      sha256: "28c5639f0a6206a5c4f4557b05069f862333b64055e943d8376df5dd077b7fd2"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: fb2fed2bc4f8527a3afdbb5cac3b62208575408f
+      url: "https://gitee.com/golabe/framework.git"
+    source: git
     version: "0.5.0"
   vm_service:
     dependency: transitive
