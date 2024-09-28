@@ -23,13 +23,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t your-image-name .
+          docker build -t vania/app:latest .
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Push Docker image
-        run: docker push your-image-name
+        run: docker push vania/app:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,8 +42,8 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: ".env"  # 或其他要复制的文件
-          target: "/path/to/your/app"
+          source: "./docker-compose.yml"  # 确保 docker-compose.yml 被复制
+          target: "/www"  # 实际路径
 
       - name: SSH to server and restart Docker container
         uses: appleboy/ssh-action@master
@@ -52,7 +52,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull your-image-name
-            docker stop your-container-name || true
-            docker rm your-container-name || true
-            docker run -d --name your-container-name -p 8000:8000 your-image-name
+            cd /var/www/myapp  # 进入目标目录
+            docker-compose pull  # 拉取最新的镜像
+            docker-compose up -d  # 启动容器
