@@ -53,17 +53,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "./docker-compose.yml"
-          target: "/www/dartly_llm"  # 确保目标路径正确
-
-      # 检查目标目录是否存在并列出内容
-      - name: List target directory
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            ls -la /www/dartly_llm  # 列出目标目录中的文件
+          target: "/dartly_llm"  
 
       - name: SSH to server and restart Docker container
         uses: appleboy/ssh-action@master
@@ -72,6 +62,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /www/dartly_llm  # 进入目标目录
+            cd /dartly_llm  # 进入目标目录
             docker-compose pull  # 拉取最新的镜像
             docker-compose up -d  # 启动容器
