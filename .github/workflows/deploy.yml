@@ -32,7 +32,7 @@ jobs:
         run: docker push dartly/vania:latest
 
   deploy:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     needs: build
 
     steps:
@@ -47,6 +47,7 @@ jobs:
             docker stop vania || true         # Stop the running container if it exists
             docker rm vania || true           # Remove the container if it exists
             docker run -d -p 8000:8000 \
+              --add-host 0.0.0.0 \  # 替换为实际的主机名和IP
               -v app:/app \
               -v /path/to/public:/public \
               -v /path/to/storage:/storage \
