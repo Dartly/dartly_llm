@@ -23,13 +23,23 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t dartly/vania:latest .  # 更新为你的 Docker Hub 用户名
+          docker build -t dartly/vania:latest .
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Push Docker image
-        run: docker push dartly/vania:latest  # 更新为你的 Docker Hub 用户名
+        run: docker push dartly/vania:latest
+
+      # 新增步骤：确认 docker-compose.yml 存在
+      - name: Check if docker-compose.yml exists
+        run: |
+          if [ -f "./docker-compose.yml" ]; then
+            echo "docker-compose.yml exists."
+          else
+            echo "docker-compose.yml does not exist."
+            exit 1
+          fi
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,8 +52,8 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./docker-compose.yml"  # 确保 docker-compose.yml 被复制
-          target: "/www/dartly_llm"  # 实际路径
+          source: "./docker-compose.yml"
+          target: "/www/dartly_llm"  # 确保目标路径正确
 
       - name: SSH to server and restart Docker container
         uses: appleboy/ssh-action@master
