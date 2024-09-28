@@ -46,4 +46,4 @@ jobs:
             docker pull dartly/vania:latest  # Pull the latest Docker image
             docker stop vania || true         # Stop the running container if it exists
             docker rm vania || true           # Remove the container if it exists
-            docker run -d -p 0.0.0.0:8000:8000 --name vania dartly/vania:latest  # Run the new container with port mapping
+            docker run -d -p 8000:8000 --name vania dartly/vania:latest  # Run the new container with port mapping
