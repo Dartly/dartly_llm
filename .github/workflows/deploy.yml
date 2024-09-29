@@ -13,6 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # SSH into the server and remove the old directory if it exists
+      - name: SSH to server and remove old directory
+        uses: appleboy/ssh-action@v0.1.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            if [ -d "/www/dartly_llm" ]; then
+              rm -rf /www/dartly_llm
+            fi
+
+      # Sync code to server
       - name: Sync code to server
         uses: appleboy/scp-action@v0.1.0
         with:
@@ -22,6 +35,7 @@ jobs:
           source: "."
           target: "/www/dartly_llm/"
 
+      # SSH into the server and run docker-compose
       - name: SSH to server and deploy
         uses: appleboy/ssh-action@v0.1.0
         with:
