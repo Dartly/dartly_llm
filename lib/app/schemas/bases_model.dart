@@ -8,16 +8,17 @@ abstract class BasesModel {
 
   Map<String, List<Validate>> getValidation();
 
-  List<String> validate(BasesModel obj) {
+  List<String> validate() {
   List<String> errors = [];
-  var rules = obj.getValidation();
+  var rules =getValidation();
 
   for (var entry in rules.entries) {
-    var fieldValue = obj.toJson()[entry.key];
+    var fieldValue =toJson()[entry.key];
 
     // 处理每个校验规则
     for (var rule in entry.value) {
       if (!rule.isValid(fieldValue)) {
+    
         errors.add(rule.message);
       }
     }
