@@ -24,8 +24,12 @@ class Login extends BasesModel {
   @override
   Map<String, List<Validate>> getValidation() {
     return {
-      'name': [const NotNull(message: '用户名不能为空')],
-      'password': [const NotNull(message: '密码不能为空')],
+      'code': [const NotNull(message: '验证码不能为空')],
+      'password': [
+        const NotNull(message: '密码不能为空'),
+        const Length(8, 12, message: '密码长度为8-12')
+      ],
+      "email": [const NotNull(message: '邮箱不能为空'), Email(message: '邮箱格式错误')]
     };
   }
 
