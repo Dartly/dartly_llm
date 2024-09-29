@@ -11,7 +11,7 @@ class NotNull extends Validate {
 
   @override
   bool isValid(Object? value) {
-    return value != null && value.toString().isNotEmpty;
+    return value != null && value.toString().trim().isNotEmpty;
   }
 }
 
