@@ -13,7 +13,7 @@ class AuthController extends Controller {
       'login.password.length_between': '密码长度必须为8-12位',
     });
 
-    final post = Login.fromJson(req.toJson());
+    // final post = Login.fromJson(req.toJson());
     return ApiResult.success();
   }
 }
