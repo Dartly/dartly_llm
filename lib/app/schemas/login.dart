@@ -26,9 +26,12 @@ class Login extends BasesModel {
     return {
       'password': [
         const NotNull(message: '密码不能为空'),
-        const Length(8, 12, message: '密码长度为8-12')
+        const Length(8, 12, message: '密码长度为8-12'),
       ],
-      "email": [const NotNull(message: '邮箱不能为空'), Email(message: '邮箱格式错误')]
+      "email": [
+        const NotNull(message: '邮箱不能为空'),
+        Email(message: '邮箱格式错误'),
+      ]
     };
   }
 

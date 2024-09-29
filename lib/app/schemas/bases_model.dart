@@ -16,6 +16,7 @@ abstract class BasesModel {
       var fieldValue = toJson()[entry.key];
 
       for (var rule in entry.value) {
+        print(rule.toString());
         if (!rule.isValid(fieldValue)) {
           errors.add(rule.message);
           throw ServeException(message: errors.join(', '));
