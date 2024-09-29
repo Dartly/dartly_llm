@@ -659,7 +659,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "9b97ecab1d0b87a28d691da05918c3f716629ba5"
+      resolved-ref: "935c9136f8b96cb16b5ef1012a50879416269985"
       url: "https://gitee.com/golabe/framework.git"
     source: git
     version: "0.5.0"
