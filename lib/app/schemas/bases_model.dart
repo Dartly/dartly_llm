@@ -15,13 +15,15 @@ abstract class BasesModel {
 
     for (var entry in rules.entries) {
       var fieldValue = obj.toJson()[entry.key];
-
       for (var rule in entry.value) {
         if (!rule.isValid(fieldValue)) {
           errors.add(rule.message);
-          throw ServeException(message: rule.message);
         }
       }
+    }
+
+    if (errors.isNotEmpty) {
+      throw ServeException(message: errors.first);
     }
 
     return errors;
