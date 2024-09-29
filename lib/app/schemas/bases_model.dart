@@ -34,7 +34,7 @@ abstract class BasesModel {
 
     // 抛出异常并合并错误信息
     if (errors.isNotEmpty) {
-      throw ServeException(message: errors.join(', '));
+      throw ServeException(message: errors.first);
     }
 
     return errors; // 返回错误信息列表（如果有的话）
