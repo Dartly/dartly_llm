@@ -9,7 +9,6 @@ environment:
 dependencies:
   vania:
     git: https://gitee.com/golabe/framework.git
-  reflectable: ^4.0.10
 
 dev_dependencies:
   lints: ^2.1.0

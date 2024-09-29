@@ -470,14 +470,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
-  reflectable:
-    dependency: "direct main"
-    description:
-      name: reflectable
-      sha256: f6abe4c7779c6c88f77b79a4317d9277c870c7292a3d6c2e56624c4846124368
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.10"
   sasl_scram:
     dependency: transitive
     description:
@@ -667,7 +659,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "395e0e84c50b9f91fd1a65bf906ab4a95604ded0"
+      resolved-ref: "9b97ecab1d0b87a28d691da05918c3f716629ba5"
       url: "https://gitee.com/golabe/framework.git"
     source: git
     version: "0.5.0"
@@ -720,4 +712,4 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.5.0 <4.0.0"
+  dart: ">=3.5.0-259.0.dev <4.0.0"

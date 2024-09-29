@@ -1,4 +1,3 @@
-import 'package:dartly_llm/app/schemas/login.dart';
 import 'package:vania/vania.dart';
 
 class AuthController extends Controller {
