@@ -1,7 +1,8 @@
-import 'package:dartly_llm/app/schemas/base_schema.dart';
-import 'package:dartly_llm/common/validator/validator.dart';
+import 'package:dartly_llm/common/validate/validate.dart';
 
-class Login extends BaseSchema {
+import 'bases_model.dart';
+
+class Login extends BasesModel {
   Login({
     required this.email,
     required this.code,
@@ -21,6 +22,14 @@ class Login extends BaseSchema {
   }
 
   @override
+  Map<String, List<Validate>> getValidation() {
+    return {
+      'name': [const NotNull(message: '用户名不能为空')],
+      'password': [const NotNull(message: '密码不能为空')],
+    };
+  }
+
+  @override
   Map<String, dynamic> toJson() {
     return {
       "email": email,
@@ -32,14 +41,5 @@ class Login extends BaseSchema {
   @override
   String toString() {
     return "$email, $code, $password, ";
-  }
-
-  @override
-  Map<String, ValidationStrategy>? validatorRule() {
-    return {
-      "email": EmailStrategy(),
-      "code": LengthStrategy(6, 6, message: '长度必须为6'),
-      "password": LengthStrategy(8, 12),
-    };
   }
 }

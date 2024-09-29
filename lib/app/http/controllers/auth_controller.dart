@@ -4,7 +4,7 @@ import 'package:vania/vania.dart';
 class AuthController extends Controller {
   Future<Response> login(Request req) async {
     final post = Login.fromJson(req.toJson());
-    post.validate();
+    post.validate(post);
     return ApiResult.success();
   }
 }
