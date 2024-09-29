@@ -9,27 +9,20 @@ abstract class BasesModel {
   Map<String, List<Validate>> getValidation();
 
   List<String> validate() {
-  List<String> errors = [];
-  var rules =getValidation();
+    List<String> errors = [];
+    var rules = getValidation();
 
-  for (var entry in rules.entries) {
-    var fieldValue =toJson()[entry.key];
+    for (var entry in rules.entries) {
+      var fieldValue = toJson()[entry.key];
 
-    // 处理每个校验规则
-    for (var rule in entry.value) {
-      if (!rule.isValid(fieldValue)) {
-    
-        errors.add(rule.message);
+      for (var rule in entry.value) {
+        if (!rule.isValid(fieldValue)) {
+          errors.add(rule.message);
+          throw ServeException(message: errors.join(', '));
+        }
       }
     }
+
+    return errors; // 返回错误信息列表（如果有的话）
   }
-
-  // 抛出异常并合并错误信息
-  if (errors.isNotEmpty) {
-    throw ServeException(message: errors.join(', '));
-  }
-
-  return errors; // 返回错误信息列表（如果有的话）
-}
-
 }
