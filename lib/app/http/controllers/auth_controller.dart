@@ -6,7 +6,6 @@ class AuthController extends Controller {
     req.validate({
       'login.email': 'required|email',
       'login.password': 'required|length_between:8,12',
-      'login.code': 'required|numeric',
     }, {
       'login.email.required': '邮箱不能为空',
       'login.email.email': '邮箱格式错误',
