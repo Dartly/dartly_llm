@@ -1,7 +1,12 @@
+import 'package:dartly_llm/app/http/services/services.dart';
+import 'package:dartly_llm/app/schemas/schemas.dart';
 import 'package:vania/vania.dart';
 
 class AuthController extends Controller {
-  Future<Response> login(Request req) async {
+  final UserService _userService = UserService();
+
+  ///邮箱注册
+  Future<Response> loginByEmail(Request req) async {
     req.validate({
       'email': 'required|email',
       'password': 'required|length_between:8,12',
@@ -12,7 +17,9 @@ class AuthController extends Controller {
       'password.length_between': '密码长度必须为8-12位',
     });
 
-    // final post = Login.fromJson(req.toJson());
+    await _userService.registerByEmail(
+      RegisterEmail.fromJson(req.toJson()),
+    );
     return ApiResult.success();
   }
 }

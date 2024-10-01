@@ -1,6 +1,5 @@
-
-class Login   {
-  Login({
+class RegisterEmail {
+  RegisterEmail({
     required this.email,
     required this.code,
     required this.password,
@@ -10,14 +9,13 @@ class Login   {
   final String? code;
   final String? password;
 
-  factory Login.fromJson(Map<String, dynamic> json) {
-    return Login(
+  factory RegisterEmail.fromJson(Map<String, dynamic> json) {
+    return RegisterEmail(
       email: json["email"],
       code: json["code"],
       password: json["password"],
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {

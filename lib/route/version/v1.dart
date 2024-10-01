@@ -7,7 +7,10 @@ class V1 implements Route {
     Router.basePrefix('api/v1');
     Router.group(
       () {
-        Router.post('login', authController.login);
+        Router.post(
+          'login-email',
+          authController.loginByEmail,
+        );
       },
       prefix: 'auth',
     );
