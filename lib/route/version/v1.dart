@@ -8,7 +8,7 @@ class V1 implements Route {
     Router.group(
       () {
         Router.post(
-          'login-email',
+          'register-email',
           authController.loginByEmail,
         );
       },
