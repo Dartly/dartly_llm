@@ -10,12 +10,12 @@ class CreateUsersTable extends Migration {
       string('avatar', nullable: true, comment: '头像');
       string('email', length: 64, nullable: true, comment: '邮箱');
       string('mobile', length: 11, nullable: true, comment: '手机号码');
-      enumType('gender', ['0', '1', '2'],defaultValue: '2', comment: '性别:0女 1男 2未知');
+      enumType('gender', ['0', '1', '2'],
+          defaultValue: '2', comment: '性别:0女 1男 2未知');
       softDeletes('deleted_at');
       timeStamp('created_at', createdAt: true, comment: '创建时间');
       timeStamp('updated_at', updatedAt: true, comment: '更新时间');
       primary('id');
-      timeStamps();
     });
   }
 
