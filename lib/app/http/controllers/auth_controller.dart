@@ -9,11 +9,10 @@ class AuthController extends Controller {
   Future<Response> register(Request req) async {
     req.validate({
       'code': 'required',
-      'mobile': 'required|length_between:11,11',
+      'mobile': 'required',
     }, {
       'code.required': '验证码不能为空',
       'mobile.required': '手机号码不能为空',
-      'mobile.length_between': '手机号码格式错误',
     });
 
     await _userService.register(

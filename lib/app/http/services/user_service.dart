@@ -11,7 +11,7 @@ class UserService {
       throw ApiException(message: '用户已存在');
     }
     await User().query().insert({
-      'id': Snowflake.instance.nextId(),
+      'id': 1,
       'mobile': post.mobile,
       'username': post.mobile,
       'avatar':
