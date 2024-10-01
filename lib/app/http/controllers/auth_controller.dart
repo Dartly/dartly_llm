@@ -11,7 +11,7 @@ class AuthController extends Controller {
       'code': 'required',
       'mobile': 'required|length_between:11,11',
     }, {
-      'email.required': '邮箱不能为空',
+      'code.required': '验证码不能为空',
       'mobile.required': '密码不能为空',
       'mobile.length_between': '手机号码格式错误',
     });
