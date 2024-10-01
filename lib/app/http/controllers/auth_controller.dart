@@ -6,21 +6,23 @@ class AuthController extends Controller {
   final UserService _userService = UserService();
 
   ///邮箱注册
-  Future<Response> loginByEmail(Request req) async {
+  Future<Response> register(Request req) async {
     req.validate({
-      'email': 'required|email',
-      'password': 'required|length_between:8,12',
+      'code': 'required',
+      'mobile': 'required|length_between:11,11',
     }, {
       'email.required': '邮箱不能为空',
-      'email.email': '邮箱格式错误',
-      'password.required': '密码不能为空',
-      'password.length_between': '密码长度必须为8-12位',
+      'mobile.required': '密码不能为空',
+      'mobile.length_between': '手机号码格式错误',
     });
 
-    await _userService.registerByEmail(
-      RegisterEmail.fromJson(req.toJson()),
+    await _userService.register(
+      Register.fromJson(req.toJson()),
     );
-    return ApiResult.success();
+
+    return ApiResult.success(
+      message: '注册成功',
+    );
   }
 }
 
