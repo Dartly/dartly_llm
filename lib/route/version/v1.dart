@@ -11,6 +11,10 @@ class V1 implements Route {
           'register',
           authController.register,
         );
+        Router.post(
+          'send-code',
+          authController.sendCode,
+        );
       },
       prefix: 'auth',
     );
