@@ -63,7 +63,7 @@ class UserService {
       throw ApiException(message: '用户不存在');
     }
 
-    final token = Auth().login(user).createToken(
+    final token = await Auth().login(user).createToken(
           expiresIn: Duration(hours: 24),
           withRefreshToken: true,
         );

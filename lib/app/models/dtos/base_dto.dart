@@ -50,7 +50,7 @@ class Mobile implements Validator {
 
   @override
   String? validate(String? value) {
-    final mobileRegex = RegExp(r'^[0-9]{10,15}$');
+    final mobileRegex = RegExp(r'^1[3-9]\d{9}$');
     return (value != null && !mobileRegex.hasMatch(value)) ? message : null;
   }
 }

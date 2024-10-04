@@ -40,7 +40,11 @@ class Helper {
     String mobile,
     String code,
   ) async {
-    await Cache.put('${type.name}:$mobile:$code', code);
+    await Cache.put(
+      '${type.name}:$mobile:$code',
+      code,
+      duration: Duration(minutes: 15),
+    );
   }
 
   ///校验验证码
