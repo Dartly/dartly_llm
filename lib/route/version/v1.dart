@@ -1,5 +1,6 @@
-import 'package:dartly_llm/app/http/controllers/controllers.dart';
 import 'package:vania/vania.dart';
+
+import '../../app/http/controllers/controllers.dart';
 
 class V1 implements Route {
   @override
@@ -8,12 +9,16 @@ class V1 implements Route {
     Router.group(
       () {
         Router.post(
+          'send-code',
+          authController.sendCode,
+        );
+        Router.post(
           'register',
           authController.register,
         );
         Router.post(
-          'send-code',
-          authController.sendCode,
+          'login',
+          authController.login,
         );
       },
       prefix: 'auth',

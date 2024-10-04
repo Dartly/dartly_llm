@@ -1,0 +1,4 @@
+enum VerificationCode {
+  Register,
+  Login,
+}

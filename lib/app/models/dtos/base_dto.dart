@@ -1,6 +1,6 @@
 import 'package:dartly_llm/common/excepitons/api_exception.dart';
 
-abstract class BaseSchema {
+abstract class BaseDto {
   Map<String, List<Validator>> rule();
 
   Map<String, dynamic> toJson() {

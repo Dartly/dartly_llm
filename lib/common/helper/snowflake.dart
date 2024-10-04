@@ -1,7 +1,6 @@
 class Snowflake {
   static final Snowflake _instance = Snowflake._internal();
 
-  // 使用单例访问
   static Snowflake get instance => _instance;
 
   Snowflake._internal();

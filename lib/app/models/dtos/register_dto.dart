@@ -1,7 +1,7 @@
-import 'package:dartly_llm/app/schemas/base_schema.dart';
+import 'package:dartly_llm/app/models/dtos/base_dto.dart';
 
-class Register extends BaseSchema {
-  Register({
+class RegisterDto extends BaseDto {
+  RegisterDto({
     required this.mobile,
     required this.code,
   });
@@ -9,8 +9,8 @@ class Register extends BaseSchema {
   final String? mobile;
   final String? code;
 
-  factory Register.fromJson(Map<String, dynamic> json) {
-    return Register(
+  factory RegisterDto.fromJson(Map<String, dynamic> json) {
+    return RegisterDto(
       code: json["code"],
       mobile: json["mobile"],
     );
@@ -31,9 +31,11 @@ class Register extends BaseSchema {
   @override
   Map<String, List<Validator>> rule() {
     return {
-      'code': [NotNull(message: '验证码不能为空')],
+      'code': [
+        NotNull(message: '验证码不能为空'),
+      ],
       'mobile': [
-       NotNull(message: '手机号码不能为空'),
+        NotNull(message: '手机号码不能为空'),
         Mobile(message: '手机号码格式错误'),
       ]
     };
